@@ -1,0 +1,31 @@
+#random cluster info
+
+#directory for mk1c data
+
+/lustre/groups/hpc/urban_lab/backup/mk1c/ 
+
+#personal directory
+
+/home/haicu/albert.perlas/
+
+#minimap command 
+
+minimap2 -ax splice -uf -k14 ref.fa direct-rna.fq > aln.sam  # Nanopore Direct RNA-seq
+
+#rsync relevant info
+
+local directory: /Users/albert.perlas/Desktop 
+
+cluster diretory: albert.perlaspuente@hpc-submit03gui:/home/haicu/albert.perlas/ 
+
+#exemple of base calling using guppy direct RNA + slurm commands 
+
+srun -p gpu_p -q gpu --gres=gpu:1 ./ont-guppy/bin/guppy_basecaller -i ./20230403_1401_MC-113930_FAU75223_2c443bde  -r -s vRNAhac/  -c rna_r9.4.1_70bps_hac.cfg -x "cuda:0"
+
+#minimap command againts reference database 
+
+minimap2 -ax map-ont FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > alnigned_01.sam
+
+#slurm basic command 
+
+srun -p gpu_p -q gpu --gres=gpu:1
