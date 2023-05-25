@@ -1,0 +1,17 @@
+#Concatenate fastqfiles
+
+#remove short reads 
+
+#quality filtering
+
+#align to reference 
+
+
+#coverage calculations
+
+#call variants
+
+
+#generate consensus
+
+
