@@ -17,8 +17,8 @@ output_sam_file=$4
 ./ont-guppy/bin/guppy_basecaller \
     -i "$input_fast5_dir" \
     -r -s "$output_fastq_file" \
-    --detect_barcodes
-    -c rna_r9.4.1_70bps_hac.cfg \
+    --detect_barcodes \
+    -c dna_r10.4.1_e8.2_400bps_hac.cfg \
     -x "cuda:0"
 
 
