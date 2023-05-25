@@ -1,5 +1,7 @@
 #Concatenate fastqfiles
 
+cat /path/to/fastq/files/*.fastq > concatenated.fastq
+
 #remove short reads 
 
 #quality filtering
