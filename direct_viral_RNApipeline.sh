@@ -2,7 +2,10 @@
 
 #slurm command
 
-srun -p gpu_p -q gpu --gres=gpu:1 
+#SBATCH --ntasks=1
+#SBATCH -p gpu_p
+#SBATCH -q gpu
+#SBATCH --gres=gpu:1
 
 # Read command-line arguments
 input_fast5_dir=$1
