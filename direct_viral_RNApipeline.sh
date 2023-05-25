@@ -18,9 +18,6 @@ output_sam_file=$4
     -x "cuda:0"
 
 
-minimap2 -ax splice -uf -k14 ref.fa direct-rna.fq > aln.sam
-
-
 # Mapping with Minimap2 from direct RNA-seq data
 minimap2 \
     -ax splice \
