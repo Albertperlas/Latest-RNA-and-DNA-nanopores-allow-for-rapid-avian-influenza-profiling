@@ -1,8 +1,17 @@
+#!/bin/bash
+
 #Concatenate fastqfiles
 
 cat /path/to/fastq/files/*.fastq > concatenated.fastq
 
 #remove short reads 
+
+
+input_file="input.fastq"
+output_file="filtered.fastq"
+min_length=200
+
+seqkit seq -m "$min_length" "$input_file" > "$output_file"
 
 #quality filtering
 
