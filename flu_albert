@@ -18,6 +18,8 @@ seqkit seq -m "$min_length" "$input_file" > "$output_file"
 #align to reference 
 
 
+#qualimap?
+
 #coverage calculations
 
 #call variants
