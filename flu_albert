@@ -17,6 +17,8 @@ seqkit seq -m "$min_length" "$input_file" > "$output_file"
 
 #align to reference 
 
+minimap2 -ax map-ont FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > alnigned_01.sam #for DNA
+
 
 #qualimap?
 
