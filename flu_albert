@@ -15,16 +15,28 @@ seqkit seq -m "$min_length" "$input_file" > "$output_file"
 
 #align to reference 
 
-minimap2 -ax map-ont path/to/reference/FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > alnigned_01.sam #for DNA
+minimap2 -ax map-ont path/to/reference/FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > aln.sam #for DNA
 minimap2 -ax splice -uf -k14 path/to/reference/FASTA.fa direct-rna.fq > aln.sam  # for RNA
 
-#coverage calculations
+#Coverage calculations
 
+#Define the input SAM file name
+input_sam="aln.sam"
 
+# Convert SAM to BAM
+samtools view -bS "$input_sam" > aligned_reads.bam
 
-#call variants
+# Sort the BAM file
+samtools sort aligned_reads.bam -o sorted_reads.bam
 
+# Index the sorted BAM file
+samtools index sorted_reads.bam
 
-#generate consensus
+# Generate a basic coverage report
+samtools depth sorted_reads.bam > coverage_report.txt
+
+# Generate a consensus sequence
+samtools mpileup -uf reference.fasta sorted_reads.bam | bcftools call -c | vcfutils.pl vcf2fq > consensus_sequence.fastq
+
 
 
