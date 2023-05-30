@@ -10,8 +10,7 @@
 # Read command-line arguments
 input_fast5_dir=$1
 output_fastq_file=$2
-reference_genome_file=$3
-output_sam_file=$4
+
 
 # Base calling with Guppy
 ./ont-guppy/bin/guppy_basecaller \
