@@ -12,7 +12,7 @@ input_fast5_dir=$1
 output_fastq_file=$2
 
 
-# Base calling with Guppy
+# HAC Base calling with Guppy
 ./ont-guppy/bin/guppy_basecaller \
     -i "$input_fast5_dir" \
     -r -s "$output_fastq_file" \
