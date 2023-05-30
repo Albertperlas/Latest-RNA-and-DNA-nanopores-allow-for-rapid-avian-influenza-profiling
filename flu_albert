@@ -13,17 +13,14 @@ min_length=50
 
 seqkit seq -m "$min_length" "$input_file" > "$output_file"
 
-#quality filtering
-
 #align to reference 
 
-minimap2 -ax map-ont path/to/reference/database/FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > alnigned_01.sam #for DNA
-minimap2 -ax splice -uf -k14 path/to/reference/database/FASTA.fa direct-rna.fq > aln.sam  # for RNA
-
-
-#qualimap?
+minimap2 -ax map-ont path/to/reference/FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > alnigned_01.sam #for DNA
+minimap2 -ax splice -uf -k14 path/to/reference/FASTA.fa direct-rna.fq > aln.sam  # for RNA
 
 #coverage calculations
+
+
 
 #call variants
 
