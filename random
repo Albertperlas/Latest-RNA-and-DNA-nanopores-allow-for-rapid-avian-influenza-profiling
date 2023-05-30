@@ -11,6 +11,13 @@
 #minimap command 
 
 minimap2 -ax splice -uf -k14 ref.fa direct-rna.fq > aln.sam  # Nanopore Direct RNA-seq
+# Mapping with Minimap2 from direct RNA-seq data
+minimap2 \
+    -ax splice \
+    -uf -k14 \
+    "$reference_genome_file" \
+    "$output_fastq_file" \
+    -o "$output_sam_file"
 
 #rsync relevant info
 
