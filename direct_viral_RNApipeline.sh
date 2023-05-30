@@ -21,10 +21,4 @@ output_sam_file=$4
     -x "cuda:0"
 
 
-# Mapping with Minimap2 from direct RNA-seq data
-minimap2 \
-    -ax splice \
-    -uf -k14 \
-    "$reference_genome_file" \
-    "$output_fastq_file" \
-    -o "$output_sam_file"
+
