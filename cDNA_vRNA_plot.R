@@ -3,7 +3,7 @@ library(ggplot2)
 library(dplyr)
 
 
-datos<-read.delim("graphicR_coveragecDNA.txt", sep='\t', header=TRUE, colClasses = "character")
+datos<-read.delim("PATH/TO/COVERAGE/DATA/graphicR_coveragecDNA.txt", sep='\t', header=TRUE, colClasses = "character")
 
 
 
