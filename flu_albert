@@ -6,7 +6,6 @@ cat /path/to/fastq/files/*.fastq > concatenated.fastq
 
 #remove short reads 
 
-
 input_file="input.fastq"
 output_file="filtered.fastq"
 min_length=50
@@ -35,8 +34,9 @@ samtools index sorted_reads.bam
 # Generate a basic coverage report
 samtools depth sorted_reads.bam > coverage_report.txt
 
-# Generate a consensus sequence
-samtools mpileup -uf reference.fasta sorted_reads.bam | bcftools call -c | vcfutils.pl vcf2fq > consensus_sequence.fastq
+
+# Generate the consensus sequence using ivar
+ivar consensus -p consensus_sequence -t 0.5 -m 10 -i sorted_reads.bam -g reference.fasta
 
 
 
