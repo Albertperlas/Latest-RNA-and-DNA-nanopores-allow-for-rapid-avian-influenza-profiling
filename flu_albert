@@ -31,6 +31,10 @@ samtools sort aligned_reads.bam -o sorted_reads.bam
 # Index the sorted BAM file
 samtools index sorted_reads.bam
 
+#also in just one command convert to bam, index and sort
+
+samtools view -bS input.sam | samtools sort -o sorted.bam - && samtools index sorted.bam
+
 # Generate a basic coverage report
 samtools depth sorted_reads.bam > coverage_report.txt
 
