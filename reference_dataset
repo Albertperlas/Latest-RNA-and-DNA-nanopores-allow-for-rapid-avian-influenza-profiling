@@ -1,1 +1,5 @@
+#after downloading a reference dataset from NCBI we have to index our .fasta file
+
+srun -p gpu_p -q gpu --gres=gpu:1 minimap2 -d reference_virus.mmi FASTA.fa 
+
 
