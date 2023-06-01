@@ -16,7 +16,7 @@ seqkit seq -m "$min_length" "$input_file" > "$output_file"
 
 minimap2 -ax map-ont path/to/reference/FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > aln.sam #for DNA
 minimap2 -ax splice -uf -k14 path/to/reference/FASTA.fa direct-rna.fq > aln.sam  # for RNA
-
+minimap2 -ax splice -uf -k7 path/to/reference/FASTA.fa direct-rna.fq > aln.sam  # for RNA viruses
 #Coverage calculations
 
 #Define the input SAM file name
