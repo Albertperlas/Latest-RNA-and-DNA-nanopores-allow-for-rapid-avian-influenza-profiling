@@ -40,3 +40,7 @@ minimap2 -ax map-ont FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > 
 #slurm basic command 
 
 srun -p gpu_p -q gpu --gres=gpu:1
+
+#install with mamba
+
+mamba install -c conda-forge -c bioconda blast
