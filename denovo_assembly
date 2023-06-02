@@ -1,0 +1,12 @@
+#not ready 
+
+#we use flye for the assembly 
+
+flye --meta --nano-raw conc_cDNA_barcode02.fastq --out-dir . 
+
+#polishing with minimap2 and racon
+
+minimap2 with assembly.fasta as input and fastq 
+
+racon conc_cDNA_barcode02.fastq aln_ass_cDNA.sam assembly.fasta > ./polyshed_ass_cDNA.fasta
+
