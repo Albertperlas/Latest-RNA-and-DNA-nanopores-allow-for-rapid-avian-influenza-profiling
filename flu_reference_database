@@ -1,0 +1,27 @@
+#NOT Ready 
+
+#mapping againts reference database by segment using minimap2
+
+#sam to bam file indexed and sorted 
+
+#select the best reference 
+
+
+highest_reference=$(awk '{if ($3 > max) {max=$3; ref=$1}} END {print ref}' aln_cDNA_idxstats.txt)
+
+
+#copy bam file and reference fasta file form the best reference 
+
+samtools view -b -o best_reference_reads_cDNA.bam sorted_aln_cDNA.bam "$highest_reference"
+
+samtools faidx ../reference/flu_dataset.fasta $highest_reference > best_reference.fasta 
+
+
+#sort and index bam file from best reference 
+
+
+#generate consensus with bcftools
+
+bcftools mpileup -Ou -f best_reference.fasta sorted_reads.bam | bcftools call -Oz -mv -o variants.vcf.gz
+bcftools index variants.vcf.gz
+bcftools consensus -f reference.fasta variants.vcf.gz > consensus.fasta
