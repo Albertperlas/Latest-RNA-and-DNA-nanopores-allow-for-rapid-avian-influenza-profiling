@@ -1,27 +1,51 @@
 #NOT Ready 
 
+#eliminate short reads 
+
+seqkit seq -m 50 -g conc_cDNA.fastq > conc_cDNA_trim.fastq
+
+
 #mapping againts reference database by segment using minimap2
+
+#first index the reference based database
+
+minimap2 -d ref.mmi ref.fa                     # indexing
+minimap2 -ax map-ont path/to/reference/FASTA.fa /home/haicu/albert.perlas/concatenatedHAC.fastq > aln.sam #for DNA 
+minimap2 -ax splice -uf -k7 path/to/reference/FASTA.fa direct-rna.fq > aln.sam #for RNA viruses 
 
 #sam to bam file indexed and sorted 
 
+samtools view -bS input.sam | samtools sort -o sorted.bam - && samtools index sorted.bam
+
 #select the best reference 
 
+samtools idxstats <sorted.bam> > aln_cDNA_idxstats.txt
 
-highest_reference=$(awk '{if ($3 > max) {max=$3; ref=$1}} END {print ref}' aln_cDNA_idxstats.txt)
+best_reference=$(awk '{if ($3 > max) {max=$3; ref=$1}} END {print ref}' aln_cDNA_idxstats.txt)
 
 
 #copy bam file and reference fasta file form the best reference 
 
-samtools view -b -o best_reference_reads_cDNA.bam sorted_aln_cDNA.bam "$highest_reference"
+samtools view -b -o best_reference_reads_cDNA.bam sorted_aln_cDNA.bam "$best_reference"
 
-samtools faidx ../reference/flu_dataset.fasta $highest_reference > best_reference.fasta 
+samtools faidx ../reference/flu_dataset.fasta $best_reference > best_reference.fasta 
 
 
 #sort and index bam file from best reference 
 
+samtools sort -o sorted.bam <input.bam> && samtools index sorted.bam
 
 #generate consensus with bcftools
 
 bcftools mpileup -Ou -f best_reference.fasta sorted_reads.bam | bcftools call -Oz -mv -o variants.vcf.gz
 bcftools index variants.vcf.gz
 bcftools consensus -f reference.fasta variants.vcf.gz > consensus.fasta
+
+#generate consensus with ivar 
+
+samtools mpileup -aa -A -d 0 -Q 0  sorted_cDNA_HA_best.bam | ivar consensus -m 0 -q 0 -p consensus_ivar_2.fasta #(quality to 0) 
+
+
+
+#check results with blastn againts gold standard
+blastn -query consensus_HA_cDNA.fasta -subject HA_italy.fasta -out output_cDNA_HA_1.txt -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore"
