@@ -44,3 +44,6 @@ srun -p gpu_p -q gpu --gres=gpu:1
 #install with mamba
 
 mamba install -c conda-forge -c bioconda blast
+
+#subsample per reads
+seqtk sample -s 42 read1.fastq 20000 > newfastq.fastq #-s seed
