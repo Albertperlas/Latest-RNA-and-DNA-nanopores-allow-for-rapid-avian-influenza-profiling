@@ -2,7 +2,7 @@
 
 #we use flye for the assembly 
 
-flye --meta --nano-raw conc_cDNA_barcode02.fastq --out-dir . 
+flye --nano-raw conc_cDNA_barcode02.fastq --out-dir . 
 
 #polishing with minimap2 and racon
 
