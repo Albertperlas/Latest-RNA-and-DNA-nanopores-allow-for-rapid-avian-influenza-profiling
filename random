@@ -55,3 +55,7 @@ seqtk sample -s 42 read1.fastq 20000 > newfastq.fastq #-s seed
 
 awk '{ total += $3 } END { print total/NR }' depth.txt 
 
+#Calculate total reads
+
+grep -c "@" file.fastq
+
