@@ -11,6 +11,7 @@
 #minimap command 
 
 minimap2 -ax splice -uf -k14 ref.fa direct-rna.fq > aln.sam  # Nanopore Direct RNA-seq
+minimap2 -ax splice -uf -k7 ref.fa direct-rna.fq > aln.sam  # Nanopore Direct RNA-seq for viruses
 # Mapping with Minimap2 from direct RNA-seq data
 minimap2 \
     -ax splice \
