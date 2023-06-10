@@ -59,3 +59,8 @@ awk '{ total += $3 } END { print total/NR }' depth.txt
 
 grep -c "@" file.fastq
 
+# cat all .txt adding a column with the name of each file 
+
+output_file="concatenated.txt" && rm -f "$output_file" && find . -type f -name "*.txt" -exec sh -c 'filename=$(basename "$1" .txt); awk -v filename="$filename" -v OFS="\t" "{ print filename, \$0 }" {} >> "$2"' sh {} "$output_file" \;
+
+
