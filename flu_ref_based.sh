@@ -38,10 +38,16 @@ samtools sort -o sorted_best_reference.bam best_reference.bam && samtools index 
 
 bcftools mpileup -Ou -f best_reference.fasta sorted_best_reference.bam | bcftools call -Oz -mv -o variants.vcf.gz
 bcftools index variants.vcf.gz
-bcftools consensus -f best_reference.fasta variants.vcf.gz > consensus.fasta
+bcftools consensus -f best_reference.fasta variants.vcf.gz > consensus_bcftools.fasta
+
+#generate consensus with ivar 
+
+samtools mpileup -aa -A -d 0 -Q 0  sorted_best_reference.bam | ivar consensus -m 0 -q 0 -p consensus_ivar.fa  
+
+
 
 #check results with blastn againts gold standard
-blastn -query consensus.fasta -subject "$gold_standard" -out output_summary.txt -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore"
+blastn -query consensus_bcftools.fasta -subject "$gold_standard" -out output_summary.txt -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore"
 
-
+blastn -query consensus_ivar.fa -subject "$gold_standard" -out output_summary.txt -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore"
 
