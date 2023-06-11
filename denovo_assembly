@@ -12,7 +12,7 @@ flye --genome-size 15000 --iterations 2  --min-overlap 1000  -o ./output  --nano
 
 #minimap2 with assembly.fasta as input and fastq 
 
-minimap2 -ax map-ont -t 8 <metaflye_assembly.fa> <raw_ont_reads.fasta>
+minimap2 -ax map-ont -t 8 <metaflye_assembly.fa> <raw_ont_reads.fastq>
 
 
 racon conc_cDNA_barcode02.fastq aln_ass_cDNA.sam assembly.fasta > ./polyshed_ass_cDNA.fasta
