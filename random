@@ -63,4 +63,11 @@ grep -c "@" file.fastq
 
 output_file="concatenated.txt" && rm -f "$output_file" && find . -type f -name "*.txt" -exec sh -c 'filename=$(basename "$1" .txt); awk -v filename="$filename" -v OFS="\t" "{ print filename, \$0 }" {} >> "$2"' sh {} "$output_file" \;
 
+## Extract non-assembled reads
+seqkit grep -v -f assembled.fasta input.fastq > non_assembled.fastq
+
+# Extract assembled contigs
+seqkit grep -r -f assembled.fasta input.fasta > assembled_contigs.fasta
+
+
 
