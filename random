@@ -69,5 +69,8 @@ seqkit grep -v -f assembled.fasta input.fastq > non_assembled.fastq
 # Extract assembled reads
 seqkit grep -r -f assembled.fasta input.fasta > assembled_contigs.fasta
 
+#see jobs running and terminate 
 
+squeue —me or squeue -u „your username“ #Then you see the jobs running. Each job has also an id which you can also see with this and then with
+scancel “job_id” #you can terminate the job of your choice
 
