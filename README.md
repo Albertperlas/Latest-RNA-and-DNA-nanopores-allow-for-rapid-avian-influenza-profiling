@@ -30,13 +30,22 @@ Script to perform reference-based pipeline from cDNA data to all fastq files
 
 Script to perform de novo assembly from all fastq files 
 
-## cDNA_vRNA_plot.R 
-
-R Scrip used to obtain depth coverage by segment 
-
 ## blastn_seq.sh 
 
-Script used to Blastn 2 sequences to all AIV segments and to all consensus fasta files. 
+Script used to Blastn 2 sequences to all AIV segments and to all consensus fasta files.
+
+## simple-coverage_plot.R
+
+R Scrip used to obtain depth coverage by segment plot
+
+## read_lenght_plot.R 
+
+R script to obtain read length plot 
+
+## bit_score_plot.R 
+
+R script to obtain bit score plot 
+
 
 ## other documents 
 
