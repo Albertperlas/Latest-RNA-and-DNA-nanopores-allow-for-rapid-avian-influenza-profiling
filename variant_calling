@@ -1,6 +1,12 @@
 #variant calling using clair3 for RNA data
 
-run_clair3.sh -b ../RNA_modifications/vRNA_max/sorted.bam -f ../RNA_modifications/italy_ref_plot.fasta -p ont -m "${CONDA_PREFIX}/bin/models/r941_prom_hac_g360+g422" -o ./clair3/RNA_max --no_phasing_for_fa --include_all_ctgs --haploid_precise -t 8 
+srun -p gpu_p -q gpu --gres=gpu:1 run_clair3.sh -b ../RNA_modifications/vRNA_max/sorted.bam -f ../RNA_modifications/italy_ref_plot.fasta -p ont -m "${CONDA_PREFIX}/bin/models/r941_prom_hac_g360+g422" -o ./clair3/RNA_max --no_phasing_for_fa --include_all_ctgs --haploid_precise -t 4 
+
+#variant calling using clair3 for DNA data and R10 kits 
+
+srun -p gpu_p -q gpu --gres=gpu:1 run_clair3.sh -b ../../cDNA_raw/sorted.bam -f ../../../RNA_modifications/italy_ref_plot.fasta -p ont -m ../../rerio/clair3_models/r1041_e82_400bps_hac_g632 -o ./ --no_phasing_for_fa --include_all_ctgs --haploid_precise -t 4
+
+
 
 #convert in txt file 
 
