@@ -1,0 +1,3 @@
+#variant calling using clair3 
+
+run_clair3.sh -b ../RNA_modifications/vRNA_max/sorted.bam -f ../RNA_modifications/italy_ref_plot.fasta -p ont -m "${CONDA_PREFIX}/bin/models/r941_prom_hac_g360+g422" -o ./clair3/RNA_max --no_phasing_for_fa --include_all_ctgs --haploid_precise -t 8 
