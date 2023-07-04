@@ -76,5 +76,5 @@ scancel “job_id” #you can terminate the job of your choice
 
 # read length distribution txt file: column 1 is length and column 2 is counts 
 
-awk 'NR%4==2 {lengths[length($0)]++} END {for (l in lengths) print l, lengths[l]}' ./max_vRNA.fastq > read_lenght_RNA.txt 
+awk 'NR%4 == 2 { print length($1) }' ./path/to/fastq.fastq | sort | uniq -c > read_lenght_output.txt 
 
