@@ -63,6 +63,10 @@ grep -c "@" file.fastq
 
 output_file="concatenated.txt" && rm -f "$output_file" && find . -type f -name "*.txt" -exec sh -c 'filename=$(basename "$1" .txt); awk -v filename="$filename" -v OFS="\t" "{ print filename, \$0 }" {} >> "$2"' sh {} "$output_file" \;
 
+# cat all .txt adding a column with the name of directory of origin 
+
+output_file="concatenated.txt" && rm -f "$output_file" && find . -type f -name "*.txt" -exec sh -c 'directory=$(dirname "$1"); directory=${directory#./}; awk -v directory="$directory" -v OFS="\t" "{ print directory, \$0 }" {} >> "$2"' sh {} "$output_file" \;
+
 ## Extract non-assembled reads
 seqkit grep -v -f assembled.fasta input.fastq > non_assembled.fastq
 
