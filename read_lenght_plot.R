@@ -1,56 +1,34 @@
+#prepare the data from fastq with awk 'NR%4 == 2 { print length($1) }' ./path/to/fastq.fastq | sort | uniq -c > read_lenght_output.txt
+
 
 library(ggplot2)
 
-data.frame <-read.table("read_length_vRNA.txt")
-data.frame_cDNA <-read.table("read_length_cDNA.txt")
 
-ggplot(data.frame, aes(x = data.frame$V1)) +
-       geom_histogram(binwidth = 0.02,fill = 'brown', color = "brown") +
-       scale_x_log10(limits = c(60, 10000), expand = c(0, 0)) +
-       xlab("Read length") + ylab("Number of reads") +
-       scale_y_continuous(limits = c(0, 100), expand = c(0, 0)) +
-       theme(plot.background = element_rect(fill = "white"),
-                         panel.grid.major = element_blank(),
-                         panel.grid.minor = element_blank(),
-                         axis.line = element_line(color = "black"),
-                         axis.text = element_text(size = 20),
-                         axis.title.y = element_text(size = 20, face = "bold"),
-                         axis.title.x = element_text(size = 20, face = "bold"),
-                         axis.text.x = element_text(size = 20, face = "bold"),
-                         axis.text.y = element_text(size = 20, face = "bold"))
+# Read the output files for both samples
+data1 <- read.table("read_lenght_RNA.txt", header = FALSE)
+data2 <- read.table("read_lenght_DNA.txt", header = FALSE)
+
+# Rename the columns
+colnames(data1) <- c("Read_Count", "Read_Length")
+colnames(data2) <- c("Read_Count", "Read_Length")
+
+# Add a column to indicate sample identity
+data1$Sample <- "vRNA"
+data2$Sample <- "cDNA"
+
+# Combine the data
+combined_data <- rbind(data1, data2)
 
 
-ggplot(data.frame_cDNA, aes(x = data.frame$V1)) +
-  geom_histogram(binwidth = 0.02,fill = 'brown', color = "brown") +
-  scale_x_log10(limits = c(60, 10000), expand = c(0, 0)) +
-  xlab("Read length") + ylab("Number of reads") +
-  scale_y_continuous(limits = c(0, 100), expand = c(0, 0)) +
-  theme(plot.background = element_rect(fill = "white"),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(color = "black"),
-        axis.text = element_text(size = 20),
-        axis.title.y = element_text(size = 20, face = "bold"),
-        axis.title.x = element_text(size = 20, face = "bold"),
-        axis.text.x = element_text(size = 20, face = "bold"),
-        axis.text.y = element_text(size = 20, face = "bold"))
+# Create the plot
+ggplot(combined_data, aes(x = Read_Length, y = Read_Count, color = Sample)) +
+  geom_point() +
+  scale_x_log10(limits = c(20, 10000), expand = c(0, 0)) +
+  xlab("Read Length") +
+  ylab("Read Count") +
+  theme_minimal()
 
 
-#combined plot
 
-ggplot() +
-  geom_histogram(data = data.frame, aes(x = V1), binwidth = 0.02, fill = 'brown', color = "brown") +
-  geom_histogram(data = data.frame_cDNA, aes(x = V1), binwidth = 0.02, fill = 'blue', color = "blue", alpha = 0.2) +
-  scale_x_log10(limits = c(60, 10000), expand = c(0, 0)) +
-  xlab("Read length") +
-  ylab("Number of reads") +
-  scale_y_continuous(limits = c(0, 100), expand = c(0, 0)) +
-  theme(plot.background = element_rect(fill = "white"),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(color = "black"),
-        axis.text = element_text(size = 20),
-        axis.title.y = element_text(size = 20, face = "bold"),
-        axis.title.x = element_text(size = 20, face = "bold"),
-        axis.text.x = element_text(size = 20, face = "bold"),
-        axis.text.y = element_text(size = 20, face = "bold"))
+ggsave("combined_read_lenght.png", width = 8, height = 7)
+
