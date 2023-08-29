@@ -1,5 +1,6 @@
-# bioinfotfm
-Code used in my master's thesis. 
+# Real-time surveillance of avian influenza through direct RNA sequencing![image](https://github.com/Albertperlas/real-time_surveillance_of_avian_influenza/assets/66008580/3ac7ee2d-8d5b-42e5-83ff-5409d8f29f16)
+
+Code used in the manuscript. 
 
 
 ## base_calling_direct_viral_RNA.sh 
