@@ -54,7 +54,8 @@ reference_base="${reference_base%.*}"
     # Generate consensus with ivar
     samtools mpileup -aa -A -d 0 -Q 0 "${fastq_base}_${reference_base}_sorted_best_reference.bam" | ivar consensus -m 0 -q 0 -p "${fastq_base}_${reference_base}_consensus_ivar.fa"
 
-  
+    # Generate a basic coverage report
+    samtools depth sorted_reads.bam > coverage_report.txt
 	
     cd ..
   done
