@@ -1,4 +1,4 @@
-#first we use nanopolish index in our RNA fastq files 
+#first we use nanopolish index in our RNA fast5 files 
 
 nanopolish index -d /path/to/directory/with/raw/fast5 /path/to/fastq/file.fastq
 
