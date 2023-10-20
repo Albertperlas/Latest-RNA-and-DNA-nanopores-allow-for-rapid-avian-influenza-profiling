@@ -12,7 +12,7 @@ input_fast5_dir=$1
 output_fastq_file=$2
 
 # HAC Base calling with Guppy
-./ont-guppy/bin/guppy_basecaller \
+/home/haicu/albert.perlas/ont-guppy/bin/guppy_basecaller \
     -i "$input_fast5_dir" \
     -r -s "$output_fastq_file" \
     --detect_barcodes \
