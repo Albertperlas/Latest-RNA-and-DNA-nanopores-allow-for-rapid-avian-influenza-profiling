@@ -44,7 +44,7 @@ def process_file(input_file_path, output_file_path):
     with open(input_file_path, 'r') as file:
         for line in file:
             parts = line.split()
-            if len(parts) >= 4 and parts[0] != 'ConsensusFile':
+            if len(parts) >= 13 and parts[0] != 'ConsensusFile':
                 downsampling = get_downsampling(parts[0])
                 nucleotide = 'cDNA'
                 segment = get_segment(parts[0])
@@ -54,7 +54,7 @@ def process_file(input_file_path, output_file_path):
 
     # Create a new file with the processed data
     with open(output_file_path, 'w') as file:
-        file.write("downsampling\tnucleotide\tsegment\ttechnique\tidentity\n")
+        file.write("downsampling\tnucleotide\tsegment\ttechnique\tbit_score\n")
         for row in processed_data:
             file.write("\\t".join(row) + "\\n")
 
