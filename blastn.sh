@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # SLURM directives
@@ -24,11 +23,12 @@ for consensus_file in "$consensus_dir"/*; do
 
     # Determine the segment name from the consensus file name
     # Adjust the following line according to your file naming convention
-    segment_name=$(echo "$consensus_name" | grep -oE '(HA|MP|NA|NP|NS|PA|PB1|PB2)')
+    segment_name=$(echo "$consensus_name" | grep -oE '(_HA_|_MP_|_NA_|_NP_|_NS_|_PA_|_PB1_|_PB2_)')
 
     # Determine the corresponding gold standard reference file
     # Adjust this line to match your reference file naming pattern
-    reference_file="${reference_dir}/${segment_name}.fasta"
+    segment_name_no_underscore=$(echo "$segment_name" | sed 's/_//g')
+    reference_file="${reference_dir}/${segment_name_no_underscore}.fasta" 
 
     # Run BLASTN
     # Adjust the BLASTN command according to your requirements
@@ -37,3 +37,5 @@ for consensus_file in "$consensus_dir"/*; do
     # Append the result to the output file
     echo "${consensus_name} ${blastn_output}" >> "$output_file"
 done
+
+
