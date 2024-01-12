@@ -28,7 +28,7 @@ for consensus_file in "$consensus_dir"/*; do
 
     # Determine the corresponding gold standard reference file
     # Adjust this line to match your reference file naming pattern
-    reference_file="${reference_dir}/${segment_name}_gold_standard.fasta"
+    reference_file="${reference_dir}/${segment_name}.fasta"
 
     # Run BLASTN
     # Adjust the BLASTN command according to your requirements
