@@ -4,11 +4,12 @@
 #SBATCH --gres=gpu:1
 
 # Directory containing FASTQ files
-fastq_dir="/path/to/fastq/files"
+fastq_dir=$1
 # Directory containing reference files for each segment
-reference_dir="/path/to/reference/files"
+reference_dir=$2
 
 min_length=50
+
 
 # Loop over each FASTQ file
 for fastq_file in "$fastq_dir"/*.fastq; do
