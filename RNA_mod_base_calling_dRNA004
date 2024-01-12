@@ -1,1 +1,19 @@
-srun -p gpu_p -q gpu_short --gres=gpu:1 /home/haicu/albert.perlas/dorado-0.4.3-linux-x64/bin/dorado basecaller --modified-bases-models /home/haicu/albert.perlas/dorado-0.4.3-linux-x64/bin/rna004_130bps_sup@v3.0.1_m6A_DRACH@v1/ --reference /home/haicu/albert.perlas/past/tfm/downsampled_fastq/plot_coverage/italy_ref_plot.fasta  /home/haicu/albert.perlas/dorado-0.4.3-linux-x64/bin/rna004_130bps_sup@v3.0.1/  /lustre/groups/hpc/urban_lab/backup/mk1c/aiv_rna004_t4/no_sample/20231218_1839_MC-113930_FAY21773_eeab08e7/pod5_all/ > callsSUP_m6A.bam
+#!/bin/bash
+
+# SLURM directives
+#SBATCH --ntasks=1
+#SBATCH -p gpu_p
+#SBATCH -q gpu_short
+#SBATCH --gres=gpu:1
+
+# Read command-line arguments
+input_dir=$1
+output_bam_file=$2
+
+# Dorado basecalling and call m6a modifications
+/home/haicu/albert.perlas/dorado-0.4.3-linux-x64/bin/dorado basecaller \
+    --modified-bases-models /home/haicu/albert.perlas/dorado-0.4.3-linux-x64/bin/rna004_130bps_sup@v3.0.1_m6A_DRACH@v1/ \
+    --reference /home/haicu/albert.perlas/past/tfm/downsampled_fastq/plot_coverage/italy_ref_plot.fasta \
+    /home/haicu/albert.perlas/dorado-0.4.3-linux-x64/bin/rna004_130bps_sup@v3.0.1/ \
+    "$input_dir" \
+    > "$output_bam_file"
