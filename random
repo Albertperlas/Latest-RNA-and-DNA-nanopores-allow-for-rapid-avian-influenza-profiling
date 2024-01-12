@@ -82,3 +82,6 @@ scancel “job_id” #you can terminate the job of your choice
 
 awk 'NR%4 == 2 { print length($1) }' ./path/to/fastq.fastq | sort | uniq -c > read_lenght_output.txt 
 
+# copy IRMA fasta files but adding the name of original directory 
+
+find /path/to/source_directory -mindepth 2 -type f -name "*.fasta" -print0 | xargs -0 -I {} bash -c 'file={}; subdir=$(basename $(dirname "$file")); cp "$file" "/path/to/destination_directory/${subdir}_$(basename "$file")"'
