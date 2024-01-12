@@ -1,6 +1,12 @@
 
 #!/bin/bash
 
+# SLURM directives
+#SBATCH -p gpu_p
+#SBATCH -q gpu_short
+#SBATCH --gres=gpu:1
+
+
 # Directory containing consensus files
 consensus_dir=$1
 # Directory containing gold standard reference files
