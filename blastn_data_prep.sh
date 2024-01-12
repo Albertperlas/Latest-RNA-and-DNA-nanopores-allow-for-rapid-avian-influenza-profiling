@@ -49,8 +49,8 @@ def process_file(input_file_path, output_file_path):
                 nucleotide = 'cDNA'
                 segment = get_segment(parts[0])
                 technique = get_technique(parts[0])
-                identity = parts[3]
-                processed_data.append([downsampling, nucleotide, segment, technique, identity])
+                bit_score = parts[12]
+                processed_data.append([downsampling, nucleotide, segment, technique, bit_score])
 
     # Create a new file with the processed data
     with open(output_file_path, 'w') as file:
