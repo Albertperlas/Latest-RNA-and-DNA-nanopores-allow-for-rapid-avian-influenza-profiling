@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -p gpu_p
-#SBATCH -q gpu
+#SBATCH -q gpu_short
 #SBATCH --gres=gpu:1
 
 # Directory containing FASTQ files
