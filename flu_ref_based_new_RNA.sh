@@ -29,7 +29,7 @@ for fastq_file in "$fastq_dir"/*.fastq; do
         seqkit seq -m "$min_length" "$fastq_file" > "$output_file"
 
         # Initial alignment to reference database
-        minimap2 -ax map-ont "$reference_file" "$output_file" > "${fastq_name}_${segment_name}_aln.sam"
+        minimap2 -ax splice -uf -k7 "$reference_file" "$output_file" > "${fastq_name}_${segment_name}_aln.sam"
 
         # Convert to BAM, index, and sort
         samtools view -bS "${fastq_name}_${segment_name}_aln.sam" | samtools sort -o "${fastq_name}_${segment_name}_sorted.bam" - && samtools index "${fastq_name}_${segment_name}_sorted.bam"
