@@ -44,7 +44,7 @@ for fastq_file in "$fastq_dir"/*.fastq; do
         samtools faidx "$reference_file" "$best_reference" > "${fastq_name}_${segment_name}_best_reference.fasta" 
 
         # Align all reads again to the best reference
-        minimap2 -ax map-ont "${fastq_name}_${segment_name}_best_reference.fasta" "$output_file" > "${fastq_name}_${segment_name}_aln_best_ref.sam"
+        minimap2 -ax splice -uf -k7 "${fastq_name}_${segment_name}_best_reference.fasta" "$output_file" > "${fastq_name}_${segment_name}_aln_best_ref.sam"
 
         # Convert to BAM, index, and sort for best reference
         samtools view -bS "${fastq_name}_${segment_name}_aln_best_ref.sam" | samtools sort -o "${fastq_name}_${segment_name}_sorted_best_reference.bam" - && samtools index "${fastq_name}_${segment_name}_sorted_best_reference.bam"
