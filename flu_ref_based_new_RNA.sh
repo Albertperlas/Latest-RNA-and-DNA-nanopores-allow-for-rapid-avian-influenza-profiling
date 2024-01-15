@@ -10,21 +10,20 @@ reference_dir=$2
 
 min_length=50
 
-
 # Loop over each FASTQ file
 for fastq_file in "$fastq_dir"/*.fastq; do
     # Extract the name of the FASTQ file without extension
     fastq_name=$(basename "$fastq_file" .fastq)
 
     # Loop over each influenza segment reference
-    for reference_file in "$reference_dir"/*.fasta; do
+    for reference_file in "$reference_dir"/*.fa; do
         # Extract the segment name from the reference file
-        segment_name=$(basename "$reference_file" .fasta)
+        segment_name=$(basename "$reference_file" .fa)
 
         # Define output file names
         output_file="${fastq_name}_${segment_name}_filtered.fastq"
         consensus_bcftools_file="${fastq_name}_${segment_name}_consensus_bcftools.fasta"
-        consensus_ivar_file="${fastq_name}_${segment_name}_consensus_ivar.fa"
+        consensus_ivar_file="${fastq_name}_${segment_name}_consensus_ivar.fasta"
 
         # Remove short reads
         seqkit seq -m "$min_length" "$fastq_file" > "$output_file"
@@ -44,7 +43,7 @@ for fastq_file in "$fastq_dir"/*.fastq; do
         samtools faidx "$reference_file" "$best_reference" > "${fastq_name}_${segment_name}_best_reference.fasta" 
 
         # Align all reads again to the best reference
-        minimap2 -ax splice -uf -k7 "${fastq_name}_${segment_name}_best_reference.fasta" "$output_file" > "${fastq_name}_${segment_name}_aln_best_ref.sam"
+        minimap2 -ax map-ont "${fastq_name}_${segment_name}_best_reference.fasta" "$output_file" > "${fastq_name}_${segment_name}_aln_best_ref.sam"
 
         # Convert to BAM, index, and sort for best reference
         samtools view -bS "${fastq_name}_${segment_name}_aln_best_ref.sam" | samtools sort -o "${fastq_name}_${segment_name}_sorted_best_reference.bam" - && samtools index "${fastq_name}_${segment_name}_sorted_best_reference.bam"
