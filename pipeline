@@ -1,5 +1,0 @@
-## 1- base call using .sh 
-## 2- use ref based flu_ref_based_new.sh and copy fasta and fa file to a new directory 
-## 3- use denovo_irma.sh and the use command (random) to copy and change names to a the same directory than before 
-## 4- then use blastn.sh to do the blastn analysys 
-## 5- data prep with blastn_data_prep.sh to the output from step 4 then user this with r code for bitscore plot 
