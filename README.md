@@ -1,13 +1,20 @@
-# Real-time surveillance of avian influenza through direct RNA sequencing
+# Latest RNA and DNA nanopores allow for rapid avian influenza profiling
 
 Code used in the manuscript. 
 
+## RNA_mod_base_calling_dRNA004.sh
 
-## base_calling_direct_viral_RNA.sh 
+Script used for detect m6A modifications. 
 
-Script used to base call direct viral RNA raw data 
+## base_calling_RNA002.sh 
 
-## base_calling_dna.sh 
+Script used to base call direct RNA002 data
+
+## base_calling_RNA004.sh 
+
+Script used to base call direct RNA004 data
+
+## base_calling_cDNA.sh
 
 Scrip used to base call cDNA from ms-rt PCR using rapid barcoding kit
 
@@ -19,37 +26,16 @@ Script used for de novo assembly with Flye and polishing with minimap2 and racon
 
 Same than before but using --meta option 
 
-## flu_all_ref_based_cDNA.sh 
+## flu_ref_based_new.sh
 
 Script to perform reference-based pipeline from cDNA data to all fastq files 
 
-## flu_all_ref_based_vRNA.sh 
+## flu_ref_based_new_RNA.sh 
 
-Script to perform reference-based pipeline from cDNA data to all fastq files 
+Script to perform reference-based pipeline from RNA004 and RNA002 data to all fastq files 
 
-## denovo_irma.sh 
+## irma.sh 
 
-Script to perform de novo assembly from all fastq files 
-
-## blastn_seq.sh 
-
-Script used to Blastn 2 sequences to all AIV segments and to all consensus fasta files.
-
-## simple-coverage_plot.R
-
-R Scrip used to obtain depth coverage by segment plot
-
-## read_lenght_plot.R 
-
-R script to obtain read length plot 
-
-## bit_score_plot.R 
-
-R script to obtain bit score plot 
-
-
-## other documents 
-
-Not relevant.
+Script to obtain consensus sequences using IRMA.  
 
 
